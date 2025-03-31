@@ -15,7 +15,10 @@ app.use(express.json());
 const dbURL = process.env.DB_URL; // Local or remote DB URL
 
 // Connect to MongoDB
-mongoose.connect(dbURL)
+mongoose.connect(dbURL,{
+    serverSelectionTimeoutMS: 5000, // Optional: set timeout for server selection
+    connectTimeoutMS: 10000, // Optional: set timeout for connection establishment
+})
   .then(() => {
     console.log('Connected to MongoDB');
   })

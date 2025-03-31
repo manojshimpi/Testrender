@@ -23,6 +23,15 @@ router.post('/events', async (req, res) => {
     }
   });
   
+  router.get('/dummy-events', (req, res) => {
+    const dummyEvents = [
+      { dummyField: 'Mock dummy data 1' },
+      { dummyField: 'Mock dummy data 2' },
+      { dummyField: 'Mock dummy data 3' },
+    ];
+  
+    res.status(200).json(dummyEvents);
+  });
 
 // 2. Get all events
 router.get('/events', async (req, res) => {
