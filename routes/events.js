@@ -6,21 +6,23 @@ const router = express.Router();
 
 // 1. Create a new event
 router.post('/events', async (req, res) => {
-  try {
-    const { name, description, date, location } = req.body;
-
-    // Create a new event instance
-    const newEvent = new Event({ name, description, date, location });
-
-    // Save the event to the database
-    await newEvent.save();
-
-    res.status(201).json({ message: 'Event created successfully', event: newEvent });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to create event' });
-  }
-});
+    try {
+      const { name, description, date, location } = req.body;
+  
+      // Create a new event instance
+      const newEvent = new Event({ name, description, date, location });
+  
+      // Save the event to the database
+      await newEvent.save();
+  
+      // Respond with success message
+      res.status(201).json({ message: 'Event created successfully', event: newEvent });
+    } catch (error) {
+      console.error('Error details:', error); // Log detailed error message
+      res.status(500).json({ error: 'Failed to create event', details: error.message });
+    }
+  });
+  
 
 // 2. Get all events
 router.get('/events', async (req, res) => {
